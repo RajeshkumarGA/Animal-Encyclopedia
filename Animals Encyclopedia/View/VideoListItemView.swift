@@ -1,0 +1,49 @@
+//
+//  VideoListItem.swift
+//  Animals Encyclopedia
+//
+//  Created by Admin on 24/12/22.
+//
+
+import SwiftUI
+
+struct VideoListItemView: View {
+    let video : Video
+    var body: some View {
+        HStack(alignment: .center, spacing: 10){
+            ZStack(alignment: .center){
+                Image(video.thumbnail)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 80)
+                    .cornerRadius(12)
+                    
+                Image(systemName: "play.circle")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 32)
+                    .shadow(radius: 4)
+            }
+            VStack(alignment: .leading, spacing: 10){
+                Text(video.name)
+                    .font(.title2)
+                    .fontWeight(.heavy)
+                    .foregroundColor(.accentColor)
+                Text(video.headline)
+                    .font(.footnote)
+                    .multilineTextAlignment(.leading)
+                    .lineLimit(2)
+                
+            }
+        }
+    }
+}
+
+struct VideoListItem_Previews: PreviewProvider {
+    static let videos : [Video] = Bundle.main.decode("videos.json")
+    static var previews: some View {
+        VideoListItemView(video: videos[0])
+            .previewLayout(.sizeThatFits)
+            .padding()
+    }
+}
